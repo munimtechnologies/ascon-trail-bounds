@@ -61,6 +61,7 @@ Prior work:
   another window.
 - `PREREG_4R_DIFF_V1.md`, `PREREG_REC_V1.md`, `PREREG_PAIR_V1.md`: each question, its rows, and
   what counts as a result, all fixed before any run.
+- `NOTE_JOBS_2026-11-17.md`: which job runs which pre-registration, written before any result.
 
 Run them: `pip install python-sat`, then `python run_bounds.py --out results --minutes 165`,
 `python ascon_lns.py --data DIR_WITH_SEED_JSON --out results --minutes 160`, or
@@ -69,7 +70,9 @@ Run them: `pip install python-sat`, then `python run_bounds.py --out results --m
 ## Status
 - 2026-11-17: v1 pre-registered; job `ascon-4r-v1` queued.
 - 2026-11-17: rec-v1 pre-registered; job `ascon-rec-v1` queued.
-- 2026-11-17: pair-v1 pre-registered; the pair search runs after rec-v1 is graded, so that any
-  record is checked in the same run.
+- 2026-11-17: pair-v1 pre-registered.
+- 2026-11-17 (later): the first queue had not started either job, so rec-v1 is also filed as
+  `ascon-rec-v2` (same code and settings) and pair-v1 as `ascon-pair-v1` in a queue that is
+  running. See `NOTE_JOBS_2026-11-17.md`. No results yet.
 
 Results will be published here as measured, including timeouts and searches that find nothing.
