@@ -26,9 +26,10 @@ Prior work:
 - [MR22] Makarim, Rohit. Towards Tight Differential Bounds of Ascon: A Hybrid Usage of SMT and MILP. ToSC 2022(3), 303-340. https://doi.org/10.46586/tosc.v2022.i3.303-340
 - El Hirch, Mella, Mehrdad, Daemen. Improved Differential and Linear Trail Bounds for ASCON. ToSC 2022(4), 145-178. https://eprint.iacr.org/2022/1377
 - Song et al. New Differential-Based Distinguishers for Ascon via Constraint Programming. IET Information Security 2024.
-- [Otoi26] N. Otoi, github.com/otoinobuo/ascon-trails (2026, not peer reviewed): 42-active 4-round and 68-active 5-round characteristics.
+- AlgSAT: a SAT method for search and verification of differential characteristics. https://eprint.iacr.org/2022/1641 (right pairs for Ascon characteristics; one published 4-round characteristic found to have none).
+- [Otoi26] N. Otoi, github.com/otoinobuo/ascon-trails (2026, not peer reviewed): 42-active 4-round and 68-active 5-round characteristics, with one real pair for the 4-round one.
 
-## Two lines of work
+## Three lines of work
 1. **Lower bound (v1).** Ask a SAT solver directly whether a 4-round characteristic with 35 or
    36 active S-boxes exists (`run_bounds.py`, `PREREG_4R_DIFF_V1.md`). The published 36 was
    obtained by splitting the problem into many per-round patterns, at a cost reported second-hand
@@ -38,6 +39,11 @@ Prior work:
    characteristics, looking for a 4-round one with 41 or fewer active S-boxes or a 5-round one
    with 67 or fewer (`ascon_lns.py`, `PREREG_REC_V1.md`). Anything found is re-checked without
    the formula, so a record does not depend on trusting the solver.
+3. **Real pairs (pair-v1).** A characteristic only describes differences, and some published
+   ones have no real pair at all. `ascon_pair.py` builds a value-level SAT model with the round
+   constants of each window of rounds and searches for two real states that follow a given
+   characteristic. Every pair it returns is re-run through the real permutation
+   (`PREREG_PAIR_V1.md`). Any new record from rec-v1 has to pass this check.
 
 ## What is here
 - `ascon_model.py`: an exact CNF model of Ascon-p differential characteristics, written in
@@ -48,14 +54,22 @@ Prior work:
 - `run_bounds.py`, `test_run_bounds.py`: the v1 lower-bound tasks on 2 CPUs, with grading.
 - `ascon_lns.py`, `test_ascon_lns.py`: the neighbourhood search, with seed loading,
   neighbourhood formulas, the search loop and grading.
-- `PREREG_4R_DIFF_V1.md`, `PREREG_REC_V1.md`: each question, its rows, and what counts as a
-  result, all fixed before any run.
+- `ascon_pair.py`, `test_ascon_pair.py`: the value-level pair search. The tests check the S-box
+  graph CNF on all 1,024 points and every per-column condition CNF on all 32 values. They also
+  check that every condition set is an affine subspace, as it must be for a quadratic S-box,
+  and that real pairs satisfy the model in their own window of rounds and violate it in
+  another window.
+- `PREREG_4R_DIFF_V1.md`, `PREREG_REC_V1.md`, `PREREG_PAIR_V1.md`: each question, its rows, and
+  what counts as a result, all fixed before any run.
 
-Run them: `pip install python-sat`, then `python run_bounds.py --out results --minutes 165`, or
-`python ascon_lns.py --data DIR_WITH_SEED_JSON --out results --minutes 160`.
+Run them: `pip install python-sat`, then `python run_bounds.py --out results --minutes 165`,
+`python ascon_lns.py --data DIR_WITH_SEED_JSON --out results --minutes 160`, or
+`python ascon_pair.py --data DIR_WITH_TRAIL_JSON --out results --per-window 300`.
 
 ## Status
 - 2026-11-17: v1 pre-registered; job `ascon-4r-v1` queued.
 - 2026-11-17: rec-v1 pre-registered; job `ascon-rec-v1` queued.
+- 2026-11-17: pair-v1 pre-registered; the pair search runs after rec-v1 is graded, so that any
+  record is checked in the same run.
 
 Results will be published here as measured, including timeouts and searches that find nothing.
