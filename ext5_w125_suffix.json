@@ -1,0 +1,25 @@
+{
+ "what": "One-round extension of the 41-active-S-box 4-round Ascon-p characteristic of L. Sotomayor (profile 14-11-9-7, weight 125) to 5 rounds. Rounds 1-3 and the round-4 input are unchanged; only the round-4 S-box output in column 21 changes (00001 -> 11000 instead of 00001 -> 01001). Words are x0..x4, 16 hex digits each; S-box index x0 = most significant bit.",
+ "source": {
+  "repo": "https://github.com/sotomayorlucas/ascon-41-trail",
+  "release": "v1.0.0 (2026-11-18)",
+  "file": "trails/ascon_p4_41active_w125.json",
+  "license": "MIT",
+  "profile": [14, 11, 9, 7],
+  "note": "Rounds 1-3 are taken unchanged from this file. Its author checks it with verify.py and a conforming pair; we have not yet re-checked rounds 1-3 ourselves (job ascon-ext-v1 does)."
+ },
+ "round4_in": ["0000000000000000", "0000000000000000", "0000000000000000", "0000000000000000", "0220000008202208"],
+ "round4_out_published": ["0000000000000000", "0220000008202208", "0000000000000000", "0000000000000000", "0220000008202208"],
+ "round4_out_new": ["0000000000200000", "0220000008202208", "0000000000000000", "0000000000000000", "0220000008002208"],
+ "round5_in": ["0200000000200004", "1330404459257248", "0000000000000000", "0000000000000000", "122040110c11324c"],
+ "round4_active_columns": [3, 9, 13, 21, 27, 53, 57],
+ "round5_active_columns": [2, 3, 6, 9, 12, 13, 14, 16, 18, 20, 21, 24, 26, 27, 28, 30, 32, 34, 36, 38, 46, 52, 53, 56, 57, 60],
+ "round5_active_published_output": 27,
+ "round5_active_min": 26,
+ "round5_min_search": "exhaustive over all 8^7 = 2097152 DDT-compatible round-4 outputs (test_ascon_extend.py)",
+ "round5_output_rule": "column value a -> S(0) xor S(a), always DDT-compatible",
+ "five_round_profile": [14, 11, 9, 7, 26],
+ "five_round_active": 67,
+ "previous_best_5_round": {"active": 68, "profile": [15, 11, 9, 7, 26], "source": "https://github.com/otoinobuo/ascon-trails"},
+ "conforming_pair_checked": false
+}
