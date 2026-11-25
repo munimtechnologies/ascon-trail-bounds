@@ -1,0 +1,21 @@
+{
+ "what": "A 5-round differential characteristic of the Ascon permutation with 67 active S-boxes (profile 14-11-9-7-26). Rounds 1-3 and the round-4 input are copied unchanged from L. Sotomayor's 41-active 4-round characteristic (ascon-41-trail v1.0.0, trails/ascon_p4_41active_w125.json, MIT; copy in data/third_party). The round-4 output differs from the published one only in column 21 (00001 -> 11000 instead of 00001 -> 01001). Round 5's output uses S(0) xor S(a) in every active column. Words are x0..x4, 16 hex digits each; S-box index x0 = most significant bit; 'in' is the S-box-layer input difference and 'out' its output difference; round constants do not change differences.",
+ "rounds": 5,
+ "per_round": [14, 11, 9, 7, 26],
+ "active": 67,
+ "previous_best_5_round": {"active": 68, "profile": [15, 11, 9, 7, 26], "source": "https://github.com/otoinobuo/ascon-trails"},
+ "checked_by": "test_ascon_extend_full.py (ascon_model.check_trail: DDT compatibility of every column of every round and x_{r+1} = L(y_r))",
+ "conforming_pair_checked": false,
+ "trail": [
+  {"in": ["000040000f0f2800", "0000100000004000", "0000100000004000", "000000000e2f2800", "000000000e2f2800"],
+   "out": ["0000000000000000", "0000500001004000", "000000000e2f2800", "0000000000000000", "0000400001200000"]},
+  {"in": ["0000000000000000", "0000d080090240a0", "00000000090000a0", "0000000000000000", "0000d08001224020"],
+   "out": ["0000000000000000", "0000d08001224020", "0000000000000000", "0000000000000000", "0000000008200080"]},
+  {"in": ["0000000000000000", "0004100048304081", "0000000000000000", "0000000000000000", "0004100048304081"],
+   "out": ["0000000000000000", "0000000000000000", "0000000000000000", "0000000000000000", "0004100048304081"]},
+  {"in": ["0000000000000000", "0000000000000000", "0000000000000000", "0000000000000000", "0220000008202208"],
+   "out": ["0000000000200000", "0220000008202208", "0000000000000000", "0000000000000000", "0220000008002208"]},
+  {"in": ["0200000000200004", "1330404459257248", "0000000000000000", "0000000000000000", "122040110c11324c"],
+   "out": ["0110004451244004", "0310005555144000", "0110005555344004", "0110005555144004", "113040555d15724c"]}
+ ]
+}

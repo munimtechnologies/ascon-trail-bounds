@@ -1,0 +1,21 @@
+{
+ "what": "Best published differential characteristics of the Ascon permutation by number of active S-boxes (smaller is better), as recorded in this repository's README and RESULTS files. Upper bounds on the true minimum; the proven 4-round lower bound is 36 (Erlacher, Mendel, Eichlseder, ToSC 2022(1)); no 5-round lower bound is listed there.",
+ "four_round_best": [
+  {"label": "Ascon designers (spec v1.2)", "year": 2021, "active": 44, "source": "https://link.springer.com/article/10.1007/s00145-021-09398-9"},
+  {"label": "Makarim and Rohit (ToSC 2022)", "year": 2022, "active": 43, "source": "https://doi.org/10.46586/tosc.v2022.i3.303-340"},
+  {"label": "Otoi (Oct 2026)", "year": 2026, "active": 42, "source": "https://github.com/otoinobuo/ascon-trails"},
+  {"label": "Sotomayor (Nov 2026)", "year": 2026, "active": 41, "source": "https://github.com/sotomayorlucas/ascon-41-trail"}
+ ],
+ "five_round_best": [
+  {"label": "Ascon designers (spec v1.2)", "year": 2021, "active": 78, "source": "https://link.springer.com/article/10.1007/s00145-021-09398-9"},
+  {"label": "Makarim and Rohit (ToSC 2022)", "year": 2022, "active": 72, "source": "https://doi.org/10.46586/tosc.v2022.i3.303-340"},
+  {"label": "Otoi (Oct 2026)", "year": 2026, "active": 68, "source": "https://github.com/otoinobuo/ascon-trails"},
+  {"label": "This repository (Nov 2026)", "year": 2026, "active": 67, "source": "ext5_full_w125.json"}
+ ],
+ "profiles": {
+  "otoi_5r": [15, 11, 9, 7, 26],
+  "this_w125": [14, 11, 9, 7, 26],
+  "this_w140": [14, 11, 9, 7, 26]
+ },
+ "round5_after_w125_round4": {"published_round4_outputs": 27, "best_round4_outputs": 26, "choices_enumerated": 2097152}
+}
