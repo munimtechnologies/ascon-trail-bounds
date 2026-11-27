@@ -8,19 +8,19 @@ By MV2 of Munim, Inc. (mv2@munimtech.com). The code and text were made with AI a
 in his name. Licence: Apache-2.0 (code), CC BY 4.0 (text). Third-party data in
 `data/third_party/` keeps its own MIT licence (`THIRD_PARTY_NOTICES.md`).
 
-## Latest result (2026-11-24)
+## Latest result (2026-11-24, extended 2026-11-27)
 **Two 5-round characteristics with 67 active S-boxes** (profile 14-11-9-7-26), one fewer than
-the best published 68, now checked end to end round by round (`RESULTS_EXT5_V2.md`,
+the best published 68, checked end to end round by round (`RESULTS_EXT5_V2.md`,
 `ext5_full_w125.json`). They extend the two 41-active 4-round characteristics published on
 2026-11-18 by L. Sotomayor. All three record 4-round characteristics (Sotomayor's two and
-Otoi's 42) share one 11-9-7 tail up to rotation, so they all extend by the same 26-active
-round. That 26 is the exhaustive minimum over all 8^7 round-4 output choices
-(`RESULTS_EXT5_V1.md`). No conforming pair has been searched for yet, and no human expert has
-checked this.
+Otoi's 42) share one 11-9-7 tail up to rotation. That tail is used optimally: round 1 in
+front of it needs at least 14 active S-boxes and round 5 behind it at least 26, so every
+5-round characteristic built on it has at least 67. A round put in front of either 41 also
+needs at least 26 (`RESULTS_BACK_V1.md`, all exhaustive). No conforming pair has been searched
+for yet, and no human expert has checked this.
 
-Next (`PREREG_BACK_V1.md`): can a round put in front of the 41-trails cost fewer than 26
-(which would give 66)? Can round 1 in front of the shared tail cost fewer than 14 (which
-would give a 4-round 40)?
+Next (`PREREG_FAM5_V1.md`): a two-ended exact search of the whole record family for a
+different member that beats 67 over 5 rounds (or 41 over 4).
 
 ## Why this question
 For 4 rounds of Ascon-p, the proven lower bound is **36** active S-boxes. The best
@@ -70,7 +70,11 @@ Prior work:
    (`ascon_extend.py`, `RESULTS_EXT5_V1.md`, `RESULTS_EXT5_V2.md`). No solver is involved.
 6. **Exact backward extensions (back-v1).** For a fixed first-round output, find every allowed
    first-round input whose round in front has at most T active S-boxes, exactly
-   (`ascon_backward.py`, `PREREG_BACK_V1.md`). No solver is involved.
+   (`ascon_backward.py`, `PREREG_BACK_V1.md`, `RESULTS_BACK_V1.md`). No solver is involved.
+7. **Two-ended family search (fam5-v1).** In the record family every characteristic is fixed by
+   one 64-bit word (the round-3 output). The search enumerates that word through four linear
+   "anchors", filters with exact lower bounds, and optimises round 1 and round 5 exactly
+   (`ascon_family5.py`, `PREREG_FAM5_V1.md`). No solver is involved.
 
 ## What is here
 - `ascon_model.py`: an exact CNF model of Ascon-p differential characteristics, written in
@@ -88,6 +92,8 @@ Prior work:
   the full 5-round characteristics.
 - `ascon_backward.py`, `test_ascon_backward*.py`: exact backward extension and the
   pre-registered claims of `PREREG_BACK_V1.md`.
+- `ascon_family5.py`, `test_ascon_family5*.py`: the family search and the pre-registered
+  claims of `PREREG_FAM5_V1.md`. A claim test is in the repository only if it passed.
 - `data/third_party/`: the published 4-round characteristics used as data (MIT).
 - `PREREG_*.md`: each question, its rows, and what counts as a result, all fixed before any run.
 - `NOTE_JOBS_2026-11-17.md`, `NOTE_PRIOR_ART_2026-11-19.md`: notes written before any result.
@@ -96,8 +102,9 @@ Run them: `pip install python-sat`, then `python run_bounds.py --out results --m
 `python ascon_lns.py --data DIR_WITH_SEED_JSON --out results --minutes 160`,
 `python ascon_pair.py --data DIR_WITH_TRAIL_JSON --out results --per-window 300`,
 `python ascon_profiles.py --data DIR_WITH_MR22_AND_SEED --out results --minutes 165`, or
-(standard library only) `python ascon_extend.py --data DIR_WITH_TRAIL_JSON --out results` and
-`python ascon_backward.py --data data/third_party --out results`.
+(standard library only) `python ascon_extend.py --data DIR_WITH_TRAIL_JSON --out results`,
+`python ascon_backward.py --data data/third_party --out results` and
+`python ascon_family5.py --anchor z --k 1 2 3 4 5 6 7 --out results`.
 
 ## Status
 - 2026-11-17: v1, rec-v1 and pair-v1 pre-registered; jobs filed.
@@ -109,5 +116,7 @@ Run them: `pip install python-sat`, then `python run_bounds.py --out results --m
 - 2026-11-24: the full 5-round characteristic checked end to end, a second 67 from the
   weight-140 trail, and the shared tail of all three record 4-round characteristics
   (`RESULTS_EXT5_V2.md`). back-v1 pre-registered (`PREREG_BACK_V1.md`).
+- 2026-11-25: all four back-v1 claims passed (`RESULTS_BACK_V1.md`).
+- 2026-11-27: fam5-v1 pre-registered (`PREREG_FAM5_V1.md`).
 
 Results will be published here as measured, including timeouts and searches that find nothing.
