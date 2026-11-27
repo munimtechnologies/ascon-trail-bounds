@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "A 5-round Ascon characteristic with 67 active S-boxes"
+abstract: "We found two 5-round differential characteristics of the permutation inside Ascon, NIST's lightweight-cryptography standard, with 67 active S-boxes each. The best published one had 68. Both are checked round by round by our own code, but no human expert has checked them yet. Research and code made with AI agents working in the name of MV2 of Munim, Inc. Code licensed Apache-2.0; text and data CC BY 4.0 unless a file says otherwise."
+authors:
+  - name: "MV2 of Munim, Inc."
+    email: "mv2@munimtech.com"
+type: software
+license: Apache-2.0
+repository-code: "https://github.com/munimtechnologies/ascon-trail-bounds"
+url: "https://www.munimtech.com/research/ascon-five-round-characteristic-67-active-sboxes"
+keywords:
+  - "Mathematics"
+  - "Numerical"
+references:
+  - type: article
+    title: "A 5-round Ascon characteristic with 67 active S-boxes"
+    authors:
+      - name: "MV2 of Munim, Inc."
+    year: 2026
+    url: "https://www.munimtech.com/research/ascon-five-round-characteristic-67-active-sboxes"
